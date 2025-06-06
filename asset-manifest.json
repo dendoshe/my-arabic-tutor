@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/my-arabic-tutor/static/css/main.bd1033b5.css",
+    "main.js": "/my-arabic-tutor/static/js/main.557a655b.js",
+    "index.html": "/my-arabic-tutor/index.html",
+    "main.bd1033b5.css.map": "/my-arabic-tutor/static/css/main.bd1033b5.css.map",
+    "main.557a655b.js.map": "/my-arabic-tutor/static/js/main.557a655b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd1033b5.css",
+    "static/js/main.557a655b.js"
+  ]
+}
