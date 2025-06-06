@@ -63,7 +63,6 @@ function App() {
       </div>
         </div>
 
-
         <div className="input-section">
           <textarea
             value={inputText}
