@@ -15,7 +15,7 @@ function App() {
     const testPostRequest = async () => {
       console.log("sending request to backend");
       setLoading(true);
-      const url = `http://127.0.0.1:8000/tutor/${language}`;
+      const url = `https://my-arabic-tutor-api.onrender.com/tutor/${language}`;
       try {
         const response = await fetch(url, {
           method: "POST",
