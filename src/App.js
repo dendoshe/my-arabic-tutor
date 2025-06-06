@@ -5,34 +5,40 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [responseData, setResponseData] = useState(null);
   const [language, setLanguage] = useState("sv");
+  const [loading, setLoading] = useState(false);
 
     useEffect(() => {
       setInputText("");
       setResponseData(null);
     }, [language]);
 
-  const testPostRequest = async () => {
-    const url = `https://my-arabic-tutor-api.onrender.com/tutor/${language}`;
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: inputText }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    const testPostRequest = async () => {
+      console.log("sending request to backend");
+      setLoading(true);
+      const url = `http://127.0.0.1:8000/tutor/${language}`;
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: inputText }),
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        setResponseData(data);
+        console.log("Translation result:", data);
+      } catch (error) {
+        console.error("Error during POST request:", error);
+      } finally {
+        setLoading(false);
       }
-
-      const data = await response.json();
-      setResponseData(data);
-      console.log("Translation result:", data);
-    } catch (error) {
-      console.error("Error during POST request:", error);
-    }
-  };
+    };
+    
 
   return (
     <div className="App">
@@ -70,9 +76,14 @@ function App() {
             rows={4}
             className="text-input"
           />
-          <button onClick={testPostRequest} className="send-button">
-            {language === "sv" ? "Översätt" : "Translate"}
-          </button>
+          <button onClick={testPostRequest} className="send-button" disabled={loading}>
+          {loading ? (
+            <div className="loader-button" />
+          ) : (
+            language === "sv" ? "Översätt" : "Translate"
+          )}
+        </button>
+           
         </div>
 
         {responseData && (
